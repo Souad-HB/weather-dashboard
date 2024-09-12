@@ -131,7 +131,7 @@ class WeatherService {
     for(let i = 0; i<filterDataWeather.length; i++) {
       forecastArray.push(this.parseCurrentWeather(filterDataWeather[i]))
     }
-       console.info(`Forecast Array line 128: ${(forecastArray)}`);
+       console.info(`Forecast Array line 128:`, forecastArray);
        return [currentWeather, ...forecastArray];
     ;
   }
