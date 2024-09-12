@@ -50,7 +50,7 @@ class WeatherService {
   private async fetchLocationData(query: string) {
     try {
       const response = await fetch(
-        `${this.baseURL}/geo/1.0/direct?q=${query}&appid=${this.apiKey}`
+        query
       );
 
       const locationData = await response.json();
@@ -70,20 +70,19 @@ class WeatherService {
     return { lat, lon };
   }
   // TODO: Create buildGeocodeQuery method
-  // private buildGeocodeQuery(): string {
-  //   return `${this.baseURL}/geo/1.0/direct?q=${this.cityName}&appid=${this.apiKey}`;
-  // }
+  private buildGeocodeQuery(): string {
+    return `${this.baseURL}/geo/1.0/direct?q=${this.cityName}&appid=${this.apiKey}`;
+  }
 
   // TODO: Create buildWeatherQuery method
   private buildWeatherQuery(coordinates: Coordinates): string {
     console.info(`lat=${coordinates.lat} and lon=${coordinates.lon}`);
-    return `${this.baseURL}/data/2.5/forecast?lat=${coordinates.lat}&lon=${coordinates.lon}&appid=${this.apiKey}`;
+    return `${this.baseURL}/data/2.5/forecast?lat=${coordinates.lat}&lon=${coordinates.lon}&units=imperial&appid=${this.apiKey}`;
 
   }
   // TODO: Create fetchAndDestructureLocationData method
   private async fetchAndDestructureLocationData() {
-    
-    const locationData = await this.fetchLocationData(this.cityName);
+    const locationData = await this.fetchLocationData(this.buildGeocodeQuery());
     console.info(`City Name line 86: ${this.cityName}`);
     console.info(`Location Data line 87: ${JSON.stringify(locationData)}`);
 
@@ -99,7 +98,7 @@ class WeatherService {
         this.buildWeatherQuery(coordinates)
       )
       const weatherData = await response.json();
-      console.info(`Weather Data line 102: ${weatherData}`);
+      console.info(`Weather Data line 102: ${JSON.stringify(weatherData)}`);
       return weatherData;
     } catch (err) {
       console.log('Error fetching weather data', err);
@@ -108,8 +107,9 @@ class WeatherService {
   }
   // TODO: Build parseCurrentWeather method
   private parseCurrentWeather(response: any) {
-    const {name:city, dt, weather, main, wind} = response;
-    console.info(`response line 112: ${JSON.stringify(response)}`);
+    const currentWeatherData = response;
+    const {dt, weather, main, wind} = currentWeatherData;
+    const city = this.cityName;
     const date = new Date(dt * 1000).toLocaleDateString();
     const icon = weather && weather.length > 0 ? weather[0].icon : '';
     const iconDescription = weather && weather.length > 0 ? weather[0].description : '';
@@ -121,11 +121,17 @@ class WeatherService {
   }
   // TODO: Complete buildForecastArray method
   private buildForecastArray(currentWeather: Weather, weatherData: any[]) {
-    const forecastArray = weatherData.map((data: any) => {
-      const weather = this.parseCurrentWeather(data); 
-       return weather;
-       })
+    console.log(`Current Weather line 123: weatherData`, weatherData);
 
+    const filterDataWeather = weatherData.filter((data:any) => {
+      return data.dt_txt.includes('12:00:00')
+    }) 
+    console.log(filterDataWeather)
+    const forecastArray: any[] = [];
+    for(let i = 0; i<filterDataWeather.length; i++) {
+      forecastArray.push(this.parseCurrentWeather(filterDataWeather[i]))
+    }
+       console.info(`Forecast Array line 128: ${(forecastArray)}`);
        return [currentWeather, ...forecastArray];
     ;
   }
@@ -135,14 +141,13 @@ class WeatherService {
     try {
     this.cityName = city;
     const coordinates : Coordinates = await this.fetchAndDestructureLocationData();
-    console.info(`Coordinates line 138: ${coordinates.lat}, ${coordinates.lon}`);
     
     const weatherData = await this.fetchWeatherData(coordinates);
-    console.info(`Weather Data line 141: ${JSON.stringify(weatherData)}`);
 
-    const currentWeather = this.parseCurrentWeather(weatherData);
+    const currentWeather = this.parseCurrentWeather(weatherData.list[0]);
+    console.info(`Current Weather line 144 current weather`, currentWeather);
 
-    return [this.buildForecastArray(currentWeather, [weatherData])];
+    return this.buildForecastArray(currentWeather, weatherData.list);
     } catch (err) {
       console.log('Error getting weather for city', err);
       throw err;
