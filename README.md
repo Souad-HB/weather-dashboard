@@ -10,7 +10,6 @@ People nowadays travel all over the world, and they tend to look up the weather 
   - [Installation](#installation)
   - [Usage](#usage)
   - [License](#license)
-  - [Contributing](#contributing)
   - [Tests](#tests)
   - [Questions](#questions)
 
@@ -24,7 +23,10 @@ People nowadays travel all over the world, and they tend to look up the weather 
 
 once the installation process is complete, open your terminal, and run: **npm run start:dev** This should run through some commands, and eventually load up the page. 
 
-you will be presented WITH a page asking  you to Search by City. in the box where it says "Search by City", type in your desired City and press Search. This should then populate the current weather of the city, the date, the  temperature, wind speed and the humidity. below that there would be a list of a forecast list for the next 5 days. It should be similar to the below screenshot. 
+you will be presented with a page asking  you to Search by City. in the box where it says "Search for a City", type in your desired City and press Search. This should then populate the current weather for the city, the date, the  temperature, wind speed and the humidity. Below that there would be a list of a forecast list for the next 5 days. 
+Also, another feature that this app has, the user can delete their search history for each city by just clicking the delete button next to the city.
+
+It should be similar to the below screenshot. 
 
 ![alt text](assets/images/screenshot.png)
 
