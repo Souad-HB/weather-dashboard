@@ -10,33 +10,44 @@ People nowadays travel all over the world, and they tend to look up the weather 
   - [Installation](#installation)
   - [Usage](#usage)
   - [License](#license)
-  - [Tests](#tests)
+  - [Deployment](#deployment)
   - [Questions](#questions)
 
 ## Installation
 
+No installation required for a user, please refer to the [Deployment](#deployment) section to get to the link. 
+
+For someone contributing to this application:
 - Clone the repository to your local machine.
 - Install node.js.
--   Navigate to the directory of the Weather Dashboard and run on the terminal: **npm i**. This should install all of the dependencies on both the client and server side. 
+- Navigate to the directory of the Weather Dashboard and run on the terminal: npm i. This should install all of the dependencies on both the client and server side.
 
 ## Usage
 
-once the installation process is complete, open your terminal, and run: **npm run start:dev** This should run through some commands, and eventually load up the page. 
-
-you will be presented with a page asking  you to Search by City. in the box where it says "Search for a City", type in your desired City and press Search. This should then populate the current weather for the city, the date, the  temperature, wind speed and the humidity. Below that there would be a list of a forecast list for the next 5 days. 
+Once the page is loaded, you will be asked to Search by City. In the box where it says "Search for a City", type in your desired City and press Search. This should then populate the current weather for the city, the date, the  temperature, wind speed and the humidity. Below that there would be a list of a forecast list for the next 5 days. 
 Also, another feature that this app has, the user can delete their search history for each city by just clicking the delete button next to the city.
 
 It should be similar to the below screenshot. 
 
 ![alt text](assets/images/screenshot.png)
 
+## Technologies Used
+
+- HTML
+- CSS
+- Typescript / Javascript
+- Server-Side API (OpenWeather API)
+- Node.js
+- Express.js
+- Render
+
 ## License
 
 This project is licensed under the MIT License. To learn more about this means, click the license button at the top.
   
-## Tests
+## Deployment
 
-N/A
+Visit this [link](https://weather-dashboard-2-zm1t.onrender.com/) to see the app live.
 
 ## Questions
 
