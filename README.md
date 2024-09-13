@@ -9,6 +9,7 @@ People nowadays travel all over the world, and they tend to look up the weather 
 
   - [Installation](#installation)
   - [Usage](#usage)
+  - [Technologies Used](#technologies-used)
   - [License](#license)
   - [Deployment](#deployment)
   - [Questions](#questions)
@@ -20,7 +21,7 @@ No installation required for a user, please refer to the [Deployment](#deploymen
 For someone contributing to this application:
 - Clone the repository to your local machine.
 - Install node.js.
-- Navigate to the directory of the Weather Dashboard and run on the terminal: npm i. This should install all of the dependencies on both the client and server side.
+- Navigate to the directory of the Weather Dashboard and run on the terminal: **npm i**. This should install all of the dependencies on both the client and server side.
 
 ## Usage
 
