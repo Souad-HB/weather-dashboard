@@ -52,10 +52,7 @@ class WeatherService {
       const response = await fetch(
         query
       );
-
       const locationData = await response.json();
-      console.log(`Location Data line 57: ${JSON.stringify(locationData)}`);
-
       return locationData;
     } catch (err) {
       console.log('Error:', err);
@@ -83,12 +80,7 @@ class WeatherService {
   // Create fetchAndDestructureLocationData method
   private async fetchAndDestructureLocationData() {
     const locationData = await this.fetchLocationData(this.buildGeocodeQuery());
-    console.info(`City Name line 86: ${this.cityName}`);
-    console.info(`Location Data line 87: ${JSON.stringify(locationData)}`);
-
     const coordinates =  this.destructureLocationData(locationData);
-    console.info(`Coordinates line 91: ${coordinates}`);
-
     return coordinates;
   }
   // Create fetchWeatherData method
@@ -98,7 +90,6 @@ class WeatherService {
         this.buildWeatherQuery(coordinates)
       )
       const weatherData = await response.json();
-      console.info(`Weather Data line 102: ${JSON.stringify(weatherData)}`);
       return weatherData;
     } catch (err) {
       console.log('Error fetching weather data', err);
@@ -131,7 +122,6 @@ class WeatherService {
     for(let i = 0; i<filterDataWeather.length; i++) {
       forecastArray.push(this.parseCurrentWeather(filterDataWeather[i]))
     }
-       console.info(`Forecast Array line 128:`, forecastArray);
        return [currentWeather, ...forecastArray];
     ;
   }
